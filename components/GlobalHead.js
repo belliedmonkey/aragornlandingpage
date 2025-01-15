@@ -2,6 +2,7 @@ import { siteConfig } from '@/lib/config'
 import { useGlobal } from '@/lib/global'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+import { usePathname } from 'next/navigation'
 
 /**
  * 页面的Head头，通常有用于SEO
@@ -24,6 +25,13 @@ const GlobalHead = props => {
   const keywords = meta?.tags || siteConfig('KEYWORDS')
   const lang = siteConfig('LANG').replace('-', '_') // Facebook OpenGraph 要 zh_CN 這樣的格式才抓得到語言
   const category = meta?.category || siteConfig('KEYWORDS') // section 主要是像是 category 這樣的分類，Facebook 用這個來抓連結的分類
+
+  const { lang: userLang } = useGlobal()
+
+  const pathname = usePathname()
+  console.log('userLang', userLang)
+  const canonicalUrl = `${siteConfig('LINK')}/${userLang.substring(0, 2)}${pathname}`
+  console.log('canonicalUrl', canonicalUrl)
 
   return (
     <Head>
