@@ -59,6 +59,8 @@ const GlobalHead = props => {
       <meta name='twitter:description' content={description} />
       <meta name='twitter:title' content={title} />
 
+      <link rel='canonical' href={canonicalUrl} />
+
       {siteConfig('COMMENT_WEBMENTION_ENABLE') && (
         <>
           <link
